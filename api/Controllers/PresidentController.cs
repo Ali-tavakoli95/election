@@ -4,12 +4,15 @@ using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
+// double result = Math.Round(Math.Sqrt(age));
+
 namespace api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
 public class PresidentController : ControllerBase
 {
+    #region MongoDb
     private readonly IMongoCollection<President> _collection;
     // Dependency Injection
     public PresidentController(IMongoClient client, IMongoDbSettings dbSettings)
@@ -17,17 +20,14 @@ public class PresidentController : ControllerBase
         var dbName = client.GetDatabase(dbSettings.DatabaseName);
         _collection = dbName.GetCollection<President>("presidents");
     }
+    #endregion
 
     [HttpPost("register")]
     public ActionResult<President> Create(President userInput)
     {
         // check if ANY doc with this NationalCode exists
-        // President president = _collection.Find<President>(p => p.NationalCode == userInput.NationalCode).FirstOrDefault();
-
-        // if(president is not null)
-        //     BadRequest($"A president with {userInput.NationalCode} is already registered.");
-
-        bool hasDocs = _collection.AsQueryable().Where<President>(p => p.NationalCode == userInput.NationalCode).Any();
+        bool hasDocs = _collection.AsQueryable().Where<President>(p => 
+                p.NationalCode == userInput.NationalCode).Any();
 
         if(hasDocs)
             return BadRequest($"A president with National Code {userInput.NationalCode} is already registered.");
