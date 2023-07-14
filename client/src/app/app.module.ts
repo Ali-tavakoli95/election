@@ -27,6 +27,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { PracticeComponent } from './components/practice/practice.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AdminComponent } from './components/admin/admin.component';
     HomeComponent,
     FooterComponent,
     AdminComponent,
+    PracticeComponent,
   ],
   imports: [
     BrowserModule,
