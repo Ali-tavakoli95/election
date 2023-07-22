@@ -68,6 +68,13 @@ export class AddPresidentComponent {
         console.log(this.presidentRes);
       }}
     );
+
+    // reset the form
+    this.presidentFg.reset();
+  }
+
+  clearForm(): void {
+    this.presidentFg.reset();
   }
   //#endregion
 }
